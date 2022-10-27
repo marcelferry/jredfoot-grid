@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:wsa='http://cxf.apache.org/ws/addressing' 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!--  import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />  -->
+
+	<jaxws:endpoint 
+	  id="helloWorld" 
+	  implementor="org.jredfoot.utgrid.utsgd.ws.cxf.HelloWorldImpl" 
+	  address="/helloWorld" >
+
+      <!-- Enable WS-Addressing -->
+      <jaxws:features>
+         <wsa:addressing xmlns:wsa="http://cxf.apache.org/ws/addressing" />
+      </jaxws:features>
+
+      <!-- Enable WS-Addressing -->
+       <jaxws:inInterceptors>
+         <!-- Enable WS-Security -->
+         <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+            <constructor-arg>
+               <map>
+                  <entry key="action" value="UsernameToken" />
+                  <entry key="passwordType" value="PasswordText" />
+                  <entry key="passwordCallbackClass" value="org.jredfoot.utgrid.utsgd.ws.cxf.ServerPasswordCallback"/>
+               </map>
+            </constructor-arg>
+         </bean>
+      	<!-- Optional, enables logging for inbound -->
+         <bean class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+       </jaxws:inInterceptors>
+ 
+      <!-- Optional, enables logging for outbound -->
+      <jaxws:outInterceptors>
+         <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+      </jaxws:outInterceptors>
+	
+		<jaxws:invoker>
+			<bean class='org.jboss.wsf.stack.cxf.InvokerJSE' />
+		</jaxws:invoker>
+   </jaxws:endpoint>
+	  	  
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="UtgridEAR">
+        <wb-resource deploy-path="/" source-path="/EarContent"/>
+        <dependent-module archiveName="utgrid-common.jar" deploy-path="/" handle="module:/resource/utgrid-common/utgrid-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-utsgd.war" deploy-path="/" handle="module:/resource/utgrid-utsgd/utgrid-utsgd">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-utsgd-client.jar" deploy-path="/" handle="module:/resource/utgrid-utsgd-client/utgrid-utsgd-client">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-utsli.war" deploy-path="/" handle="module:/resource/utgrid-utsli/utgrid-utsli">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-portal.war" deploy-path="/" handle="module:/resource/utgrid-portal/utgrid-portal">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-utsaa.war" deploy-path="/" handle="module:/resource/utgrid-utsaa/utgrid-utsaa">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-utsaa-client.jar" deploy-path="/" handle="module:/resource/utgrid-utsaa-client/utgrid-utsaa-client">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-utgar.war" deploy-path="/" handle="module:/resource/utgrid-utgar/utgrid-utgar">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="utgrid-utgar-client.jar" deploy-path="/" handle="module:/resource/utgrid-utgar-client/utgrid-utgar-client">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>        
+    </wb-module>
+</project-modules>

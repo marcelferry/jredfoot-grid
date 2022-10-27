@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- TODO: insert globus license -->
+
+<!-- $Id: se.xsd,v 1.1 2003/04/16 06:19:13 benc Exp $ -->
+
+<schema targetNamespace="http://glue.base.ogsa.globus.org/se/1.1"
+             xmlns:se="http://glue.base.ogsa.globus.org/se/1.1"
+             xmlns:ce="http://glue.base.ogsa.globus.org/ce/1.1"
+             attributeFormDefault="qualified"
+             elementFormDefault="qualified"
+	     	 xmlns="http://www.w3.org/2001/XMLSchema"
+             xml:lang="en" >
+
+<import namespace="http://glue.base.ogsa.globus.org/ce/1.1"  schemaLocation="ce.xsd"/>
+
+<element name="StorageLibrary" type="se:StorageLibraryType" />
+
+
+
+<complexType name="ArchitectureType">
+  <sequence>
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="MaxIOCapacity" type="int" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="PerformanceType">
+  <sequence>
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="MaxIOCapacity" type="int" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="PolicyType">
+  <sequence>
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="CurrentIOLoad" type="string" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+
+<complexType name="StorageLibraryType">
+  <sequence>
+    <element name="Architecture" type="se:ArchitectureType" minOccurs="0" maxOccurs="1" />
+    <element name="Performance" type="se:PerformanceType" minOccurs="0" maxOccurs="1" />
+    <element name="StorageService" type="se:StorageServiceType" minOccurs="0" maxOccurs="unbounded" />
+    <element name="FileSystem" type="ce:FileSystemType" minOccurs="0" maxOccurs="unbounded" />
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attributeGroup ref="ce:IdentifiableEntity" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="Architecture">
+  <sequence>
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="Type" type="string" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="Performance">
+  <sequence>
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="MaxIOCapacity" type="int" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="StorageServiceType">
+  <sequence>
+    <element name="State" type="se:StorageServiceStateType" minOccurs="0" maxOccurs="1" />
+    <element name="AccessProtocol" type="se:AccessProtocolType" minOccurs="0" maxOccurs="unbounded" />
+    <element name="StorageSpace" type="se:StorageSpaceType" minOccurs="0" maxOccurs="unbounded" />
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="Port" type="int" />
+  <attributeGroup ref="ce:IdentifiableEntity" />
+  <anyAttribute namespace="##other"/>
+
+</complexType>
+
+<complexType name="AccessProtocolType">
+  <sequence>
+    <element name="SupportedSecurity" type="string" minOccurs="0" maxOccurs="1" />
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="Type" type="string" />
+  <attribute name="Port" type="int" />
+  <attribute name="Version" type="string" />
+  <attribute name="AccessTime" type="duration" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="StorageServiceStateType">
+  <sequence>
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="CurrentIOLoad" type="string" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="StorageSpaceType">
+  <sequence>
+    <element name="Policy" type="se:PolicyType" minOccurs="0" maxOccurs="1" />
+    <element name="State" type="se:StorageSpaceStateType" minOccurs="0" maxOccurs="1" />
+    <element name="AccessControlBase" type="ce:AccessControlBaseType" minOccurs="0" maxOccurs="1" />
+    <!-- TODO: put in the 'Realized On' relationship to a ce directory -->
+
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+<complexType name="StorageSpaceStateType">
+  <sequence>
+    <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+  </sequence>
+  <attribute name="AvailableSpace" type="int" />
+  <attribute name="UsedSpace" type="int" />
+  <anyAttribute namespace="##other"/>
+</complexType>
+
+</schema>
+
+

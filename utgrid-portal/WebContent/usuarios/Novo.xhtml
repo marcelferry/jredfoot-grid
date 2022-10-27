@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:m="http://www.mythe.com.br/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle.NovaColaboradorTitulo}"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:panel header="#{bundle.DadosGerais}" >
+				<h:panelGrid columns="2" width="500px" columnClasses="campoRotulo, campoDado">
+					<h:graphicImage url="/images/spacer.png" height="1" width="150" />
+					<h:graphicImage url="/images/spacer.png" height="1" width="350" />
+					
+					<h:outputLabel value="#{bundle.ColaboradorLabelNome}: "
+						for="nomeColaborador" />
+					<h:inputText id="nomeColaborador"
+						value="#{colaboradorController.selected.nome}"
+						title="#{bundle.ColaboradorLabelNome}" size="50"/>
+
+					<h:outputLabel value="#{bundle.ColaboradorLabelNascimento}: "
+						for="nascimentoColaborador" />
+					<p:calendar id="nascimentoColaborador"
+						value="#{colaboradorController.selected.nascimento}"
+						title="#{bundle.ColaboradorLabelNascimento}" pattern="dd/MM/yyyy"
+						mode="popup" language="pt_BR" />
+						
+					<h:outputLabel value="#{bundle.ColaboradorLabelEmail}: "
+						for="emailColaborador" />
+					<h:inputText id="emailColaborador"
+						value="#{colaboradorController.selected.email}"
+						title="#{bundle.ColaboradorLabelEmail}" size="50" />
+						
+					<h:outputLabel value="#{bundle.ColaboradorLabelSpark}: "
+						for="sparkColaborador" />
+					<h:inputText id="sparkColaborador"
+						value="#{colaboradorController.selected.spark}"
+						title="#{bundle.ColaboradorLabelSpark}" size="50" />
+											
+					<h:outputLabel value="#{bundle.ColaboradorLabelPerfil}: "
+						for="perfilColaborador" />
+					<h:selectOneMenu id="perfilColaborador"
+						value="#{colaboradorController.selected.perfil}">
+						<f:selectItem itemValue="" itemLabel="--" />
+						<f:selectItem itemValue="PGM" itemLabel="Programador" />
+						<f:selectItem itemValue="CQ" itemLabel="CQ" />
+						<f:selectItem itemValue="QA" itemLabel="QA" />
+						<f:selectItem itemValue="PCP" itemLabel="PCP" />						
+						<f:selectItem itemValue="CP" itemLabel="Coordenador Plataforma" />
+					</h:selectOneMenu>
+					
+					<h:outputLabel value="#{bundle.ColaboradorLabelContratacao}: "
+						for="contratacaoColaborador" />
+					<h:selectOneMenu id="contratacaoColaborador"
+						value="#{colaboradorController.selected.contratacao}">
+						<f:selectItem itemValue="" itemLabel="--" />
+						<f:selectItem itemValue="Cotas" itemLabel="Cotas" />
+						<f:selectItem itemValue="CLT" itemLabel="CLT Full" />
+					</h:selectOneMenu>	
+						
+					
+					<h:outputLabel id="racf" value="#{bundle.ColaboradorLabelRacf}: "
+						for="racfColaborador" />
+					<h:inputText id="racfColaborador"
+						value="#{colaboradorController.selected.racf}"
+						title="#{bundle.ColaboradorLabelRacf}" size="50" />
+
+					<h:outputLabel id="funcional" value="#{bundle.ColaboradorLabelFuncional}: "
+						for="funcionalColaborador" />
+					<h:inputText id="funcionalColaborador"
+						value="#{colaboradorController.selected.funcional}"
+						title="#{bundle.ColaboradorLabelFuncional}" size="50" />
+
+					<h:outputLabel id="nomeVm" value="#{bundle.ColaboradorLabelNomeVm}: "
+						for="nomeVmColaborador" />
+					<h:inputText id="nomeVmColaborador"
+						value="#{colaboradorController.selected.nomeVm}"
+						title="#{bundle.ColaboradorLabelNomeVm}" size="50" />
+
+					<h:outputLabel id="status" value="#{bundle.ColaboradorLabelStatus}: "
+						for="statusColaborador" />
+					<h:selectBooleanCheckbox id="statusColaborador"
+						value="#{colaboradorController.selected.status}"
+						title="#{bundle.ColaboradorLabelStatus}" />
+												
+					<p:pickList value="#{colaboradorControler.habilidades}" var="habilidade"    
+                		itemLabel="#{habilidade.nome}" itemValue="#{habilidade.id}" rendered="false">
+                		   	<f:facet name="add"><p:graphicImage value="/images/picklist/add.png" styleClass="pickListControl"/></f:facet>  
+					        <f:facet name="addAll"><p:graphicImage value="/images/picklist/addall.png" styleClass="pickListControl"/></f:facet>  
+        					<f:facet name="remove"><p:graphicImage value="/images/picklist/remove.png" styleClass="pickListControl"/></f:facet>  
+        					<f:facet name="removeAll"><p:graphicImage value="/images/picklist/removeall.png" styleClass="pickListControl"/></f:facet>
+    				</p:pickList>  				
+				</h:panelGrid>
+			</p:panel>
+			<br />
+			<p:panel id="documentacao" header="#{bundle.Documentacao}" width="500px">
+				<h:panelGrid columns="2" columnClasses="campoRotulo, campoDado">	
+					<h:graphicImage url="/images/spacer.png" height="1" width="150" />
+					<h:graphicImage url="/images/spacer.png" height="1" width="350" />
+						
+					<h:outputLabel id="cpf" value="#{bundle.ColaboradorLabelCpf}: "
+						for="cpfColaborador" />
+					<p:inputMask id="cpfColaborador"
+						value="#{colaboradorController.selected.cpf}"
+						title="#{bundle.ColaboradorLabelCpf}" mask="999.999.999-99" size="14"/>
+
+					<h:outputLabel id="rg" value="#{bundle.ColaboradorLabelRg}: "
+						for="rgColaborador" size="11"/>
+					<h:inputText id="rgColaborador"
+						value="#{colaboradorController.selected.rg}"
+						title="#{bundle.ColaboradorLabelRg}" />
+				</h:panelGrid>
+			</p:panel>			
+			<br />
+			<ul>
+				<li><h:commandButton styleClass="ui-state-default" 
+					action="#{colaboradorController.create}"
+					value="#{bundle.ColaboradorLinkSalvar}" /></li>
+			</ul>
+		</h:form>
+	</ui:define>
+	<ui:define name="menuAcoes">
+		<h:form>
+			<ul class="menu-acoesAbas">
+
+				<li><h:commandButton styleClass="ui-state-default" 
+					action="#{colaboradorController.prepareList}"
+					value="#{bundle.ColaboradorLinkListar}" immediate="true" /></li>
+				<li><h:commandButton styleClass="ui-state-default" 
+					value="#{bundle.ColaboradorLinkIndex}" action="/index"
+					immediate="true" /></li>
+			</ul>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

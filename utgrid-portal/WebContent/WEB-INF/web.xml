@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <context-param>
+  <description>
+      When enabled, the runtime initialization and default ResourceHandler
+      implementation will use threads to perform their functions. Set this 
+      value to false if threads aren't desired (as in the case of running 
+      within the Google Application Engine).
+
+      Note that when this option is disabled, the ResourceHandler will not 
+      pick up new versions of resources when ProjectStage is development.
+    </description>
+  <param-name>com.sun.faces.enableThreading</param-name>
+  <param-value>false</param-value>
+ </context-param>
+ <context-param>
+  <description>
+      Set this flag to true if you want the JavaServer Faces
+      Reference Implementation to validate the XML in your
+      faces-config.xml resources against the DTD. Default
+      value is false.
+    </description>
+  <param-name>com.sun.faces.validateXml</param-name>
+  <param-value>true</param-value>
+ </context-param>
+ <context-param>
+  <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+  <param-value>.xhtml</param-value>
+ </context-param>
+ <context-param>
+  <param-name>javax.faces.PROJECT_STAGE</param-name>
+  <param-value>Production</param-value>
+ </context-param>
+ <context-param>
+  <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+  <param-value>server</param-value>
+ </context-param>
+ <context-param>
+  <param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
+  <param-value>true</param-value>
+ </context-param>
+ <context-param>
+  <param-name>primefaces.THEME</param-name>
+  <param-value>none</param-value>
+ </context-param>
+ <listener>
+  <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+ </listener>
+  <servlet>
+  <servlet-name>Faces Servlet</servlet-name>
+  <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet>
+  <servlet-name>Resource Servlet</servlet-name>
+  <servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.jsf</url-pattern>
+  
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Resource Servlet</servlet-name>
+  <url-pattern>/primefaces_resource/*</url-pattern>
+ </servlet-mapping>
+ <session-config>
+  <session-timeout>30</session-timeout>
+ </session-config>
+ <welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+  <welcome-file>index.xhtml</welcome-file>
+  <welcome-file>index.html</welcome-file>
+ </welcome-file-list>
+ <error-page>
+  <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+  <location>/portal/index.jsp</location>
+ </error-page>
+</web-app>

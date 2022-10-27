@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+	<local-tx-datasource>
+		<jndi-name>jdbc/PgUtDataGerDS</jndi-name>
+		<connection-url>jdbc:postgresql://localhost:5432/utsgd</connection-url>
+		<driver-class>org.postgresql.Driver</driver-class>
+		<user-name>syssgd</user-name>
+		<password>iopewq1</password>
+		<min-pool-size>5</min-pool-size>
+		<max-pool-size>30</max-pool-size>
+		<idle-timeout-minutes>1</idle-timeout-minutes>
+		<prepared-statement-cache-size>32</prepared-statement-cache-size>
+	</local-tx-datasource>
+</datasources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:application="http://java.sun.com/xml/ns/javaee/application_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd" id="Application_ID" version="5">
+  <display-name>UtgridEAR</display-name>
+  <module>
+    <web>
+      <web-uri>utgrid-utgar.war</web-uri>
+      <context-root>utgrid-utgar</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>utgrid-utsaa.war</web-uri>
+      <context-root>utgrid-utsaa</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>utgrid-utsgd.war</web-uri>
+      <context-root>utgrid-utsgd</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>utgrid-utsli.war</web-uri>
+      <context-root>utgrid-utsli</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>utgrid-portal.war</web-uri>
+      <context-root>portal</context-root>
+    </web>
+  </module>
+  <module>
+    <java>pgsql-utportal-ds.xml</java>
+  </module>
+  <module>
+    <java>pgsql-utsgd-ds.xml</java>
+  </module>
+  <module>
+    <java>pgsql-utsaa-ds.xml</java>
+  </module>
+</application>

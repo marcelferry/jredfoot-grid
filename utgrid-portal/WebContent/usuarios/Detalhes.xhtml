@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.DetalhesColaboradorTitulo}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form>
+            	<p:panel header="#{bundle.DadosGerais}" >
+	                <h:panelGrid columns="2" columnClasses="campoRotulo,campoDado">
+						<h:graphicImage url="/images/spacer.png" height="1" width="150" />
+						<h:graphicImage url="/images/spacer.png" height="1" width="350" />
+						
+	      				<h:outputText value="#{bundle.ColaboradorLabelID}: "/>
+	                    <h:outputText value="#{colaboradorController.selected.id}" title="#{bundle.ColaboradorLabelID}"/>
+												
+	      				<h:outputText value="#{bundle.ColaboradorLabelNome}: "/>
+	                    <h:outputText value="#{colaboradorController.selected.nome}" title="#{bundle.ColaboradorLabelNome}"/>
+	                    
+	                    <h:outputText value="#{bundle.ColaboradorLabelNascimento}: "  />
+	                    <h:outputText value="#{colaboradorController.selected.nascimento}" title="#{bundle.ColaboradorLabelNascimento}">
+	                    	<f:convertDateTime pattern="dd/MM/yyyy" />
+	                    </h:outputText>	           
+
+	                    <h:outputText value="#{bundle.ColaboradorLabelEmail}: " />
+	                    <h:outputText value="#{colaboradorController.selected.email}" title="#{bundle.ColaboradorLabelEmail}"/>	
+                    	                    
+						<h:outputText value="#{bundle.ColaboradorLabelSpark}: "  />
+						<h:outputText value="#{colaboradorController.selected.spark}" title="#{bundle.ColaboradorLabelSpark}" />
+												
+						<h:outputText value="#{bundle.ColaboradorLabelPerfil}: " />
+						<h:outputText value="#{colaboradorController.selected.perfil}" />
+						
+						<h:outputText value="#{bundle.ColaboradorLabelContratacao}: " />
+						<h:outputText value="#{colaboradorController.selected.contratacao}" />	
+						
+						<h:outputText value="#{bundle.ColaboradorLabelRacf}: " />
+						<h:outputText value="#{colaboradorController.selected.racf}" title="#{bundle.ColaboradorLabelRacf}" />
+	
+						<h:outputText value="#{bundle.ColaboradorLabelFuncional}: " />
+						<h:outputText value="#{colaboradorController.selected.funcional}" title="#{bundle.ColaboradorLabelFuncional}" />
+	
+						<h:outputText value="#{bundle.ColaboradorLabelNomeVm}: " />
+						<h:outputText value="#{colaboradorController.selected.nomeVm}" title="#{bundle.ColaboradorLabelNomeVm}" />
+	
+						<h:outputText value="#{bundle.ColaboradorLabelStatus}: " />
+						<h:panelGroup>
+							<h:outputText value="Sim" rendered="#{colaboradorController.selected.status}"/>
+							<h:outputText value="Não" rendered="#{not colaboradorController.selected.status}"/>
+						</h:panelGroup>								
+		                    	                    
+					</h:panelGrid>
+				</p:panel>
+				<br />
+				<p:panel id="documentacao" header="#{bundle.Documentacao}" width="500px">
+					<h:panelGrid columns="2" columnClasses="campoRotulo, campoDado">	
+						<h:graphicImage url="/images/spacer.png" height="1" width="150" />
+						<h:graphicImage url="/images/spacer.png" height="1" width="350" />	                    	                    
+	
+	
+						<h:outputText value="#{bundle.ColaboradorLabelCpf}: "  />
+	                    <h:outputText value="#{colaboradorController.selected.cpf}" title="#{bundle.ColaboradorLabelCpf}" />
+	
+	                    <h:outputText value="#{bundle.ColaboradorLabelRg}: "  />
+	                    <h:outputText value="#{colaboradorController.selected.rg}" title="#{bundle.ColaboradorLabelRg}" />	
+	
+		
+					</h:panelGrid>
+				</p:panel>
+                <ul class="menu-acoesAbas">
+	                <li>
+	                	<h:commandLink  styleClass="botaoAtivado" action="#{colaboradorController.destroyAndView}" value="#{bundle.ColaboradorLinkExcluir}"/>
+	                </li>
+	                <li>
+	                	<h:commandLink  styleClass="botaoAtivado" action="Editar" value="#{bundle.ColaboradorLinkEditar}"/>
+	                </li>
+                </ul>
+            </h:form>
+        </ui:define>
+                <ui:define name="menuAcoes">
+			<h:form>
+			<ul class="menu-acoesAbas">
+                <li>
+                	<h:commandButton styleClass="ui-state-default" action="#{colaboradorController.prepareCreate}" value="#{bundle.ColaboradorLinkNovo}" />
+                </li>
+                <li>
+                	<h:commandButton styleClass="ui-state-default" action="#{colaboradorController.prepareList}" value="#{bundle.ColaboradorLinkListar}"/>
+                </li>
+                <li>
+                	<h:commandButton styleClass="ui-state-default" value="#{bundle.ColaboradorLinkIndex}" action="/index" immediate="true" />			    
+			    </li>
+			</ul>
+			</h:form>
+		</ui:define>
+        
+    </ui:composition>
+
+</html>

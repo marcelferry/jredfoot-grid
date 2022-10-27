@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-app>
+<module>
+  <service>pgsql-utportal-ds.xml</service>
+</module>
+<module>
+  <service>pgsql-utsgd-ds.xml</service>
+</module>
+<module>
+  <service>pgsql-utsaa-ds.xml</service>
+</module>
+</jboss-app>

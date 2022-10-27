@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListUserTitle}"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<h:form styleClass="jsfcrud_list_form">
+			<center>
+				<h:outputText escape="false" value="#{bundle.GeralListaVazia}"
+					rendered="#{userController.lazyItems.rowCount == 0}" />
+				<h:panelGroup
+					rendered="#{userController.lazyItems.rowCount > 0}">
+					<p:dataTable paginatorPosition="bottom"
+						value="#{userController.lazyItems}" paginator="true"
+						rows="5" lazy="true" var="item" border="0" cellpadding="2"
+						cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row"
+						rules="all" firstPageLinkLabel="#{ bundle.Primeira }"
+						lastPageLinkLabel="#{ bundle.Ultima }"
+						nextPageLinkLabel="#{ bundle.Proxima }"
+						previousPageLinkLabel="#{ bundle.Anterior }"
+						sortAscMessage="#{ bundle.Ascendente }"
+						sortDescMessage="#{ bundle.Descendente }"
+						loadingMessage="#{ bundle.Carregando }">
+						<p:column width="100" styleClass="colunaNumero">
+							<f:facet name="header">
+								<h:outputText value="#{bundle.UserLabelID}" />
+							</f:facet>
+							<h:commandLink class="detalhes"
+								action="#{userController.prepareView}"
+								title="#{bundle.GeralLinkExibir}">
+								<h:outputText value="#{item.id}" />
+							</h:commandLink>
+						</p:column>
+						<p:column width="400" styleClass="colunaString">
+							<f:facet name="header">
+								<h:outputText value="#{bundle.UserLabelName}" />
+							</f:facet>
+							<h:outputText value="#{item.name}" />
+						</p:column>
+						<p:column width="100" styleClass="colunaNumero">
+							<f:facet name="header">
+								<h:outputText value="#{bundle.Acoes}" />
+							</f:facet>
+							<h:commandButton style="border: none;"
+								action="#{userController.prepareEdit}"
+								value="#{bundle.GeralLinkEditar}"
+								image="/images/icon_modify.gif" />
+							<h:outputText value=" " />
+							<h:commandButton style="border: none;"
+								action="#{userController.destroy}"
+								value="#{bundle.GeralLinkExcluir}"
+								image="/images/icon_delete.gif" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</center>
+		</h:form>
+	</ui:define>
+	<ui:define name="menuAcoes">
+		<h:form>
+			<ul class="menu-acoesAbas">
+				<li><h:commandButton styleClass="ui-state-default"
+						action="#{userController.prepareCreate}"
+						value="#{bundle.GeralLinkNovo}" /></li>
+				<li><h:commandButton styleClass="ui-state-default"
+						value="#{bundle.GeralLinkIndex}" action="/index" immediate="true" />
+				</li>
+			</ul>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+</html>

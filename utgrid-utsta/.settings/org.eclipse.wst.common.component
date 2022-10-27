@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="utgrid-utsta">
+        <wb-resource deploy-path="/" source-path="/WebContent"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="utgrid-utsta"/>
+        <property name="java-output-path" value="/utgrid-utsta/build/classes"/>
+    </wb-module>
+</project-modules>

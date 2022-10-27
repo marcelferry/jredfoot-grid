@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <link rel="stylesheet" type="text/css" href="#{ request.contextPath }/skins/cupertino/skin.css"/> 
+    </h:head>
+    
+    <h:body style="margin-top:0;margin-left:0;">
+ 	<p:growl id="growl" showDetail="true" life="3000"  />      
+   	<h:form  prependId="false">
+   	<div style="background-color: #FF8040; height: 50px;" class="ui-widget-header">
+   	<h:panelGrid columns="3" width="800">
+   		<h:outputText style="font-family: Comic Sans, Comic Sans MS, cursive; font-size: 32px; color: #000080;" value="#{bundle.TituloAplicacao}" />		
+		<h:outputText style="font-size: 12px; color: #ffffff; text-align: right;" value=" Seja bem Vindo, #{ indentity.currentUser.email }!!" />	
+   	</h:panelGrid>
+   	
+	</div>       	
+	<p:menubar>
+		<p:submenu label="Tarefas">
+			<p:menuitem value="Submeter Tarefa" action="#{taskController.prepararEnvioTarefa}" ajax="false" />
+			<p:menuitem value="Tarefas em Andamento" action="#{taskController.prepareFilter}" ajax="false" />
+			<p:menuitem value="Tarefas em Concluídas" action="#{taskController.prepararListaTarefasConcluidas}" ajax="false" />
+		</p:submenu>
+		<p:submenu label="Nós">
+			<p:menuitem value="Nós" action="#{gridNodeController.prepareFilter}" ajax="false" />		
+		</p:submenu>
+		<p:submenu label="Cadastros">
+			<p:menuitem value="Organizações" action="#{organizationController.prepareFilter}" ajax="false" />		
+			<p:menuitem value="Grupos" action="#{groupController.prepareFilter}" ajax="false" />
+			<p:menuitem value="Permissões" action="#{permissaoController.prepararFiltro}" ajax="false" />
+			<p:menuitem value="Usuários" action="#{userController.prepareFilter}" ajax="false" />					
+		</p:submenu>
+		<p:submenu label="Relatórios">
+			<p:menuitem value="Processamento por Tarefa" action="#{relatorioController.prepararProcessamentoTarefa}" ajax="false" />
+			<p:menuitem value="Processamento por Usuário" action="#{relatorioController.prepareProcessamentoUsuario}" ajax="false" />
+			<p:menuitem value="Recursos Disponíveis" action="#{relatorioController.prepararRecursoDisponíveis}" ajax="false" />
+		</p:submenu>
+	</p:menubar>
+	</h:form>
+	
+	
+	
+	<div style="margin-left:10px; padding: 10px; width:800px;">
+	    <h1 style="color: #3f3731; "><ui:insert name="title">Default Title</ui:insert></h1>
+		<p><ui:insert name="body">Default Body</ui:insert></p>
+		<br/>
+	</div>
+	<div style="margin-left:10px; width:800px;">
+		<ul class="menu-acoes">
+			<ui:insert name="menuAcoes"></ui:insert>
+		</ul>
+	</div>
+	
+</h:body>
+</html>

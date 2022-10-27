@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://www.mythe.com.br/facelets"
+	  xmlns:p="http://primefaces.prime.com.tr/ui">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditOrganizationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+			<h:form prependId="false">
+			<p:panel header="#{bundle.DadosGerais}">
+				<h:panelGrid columns="2" width="500px" columnClasses="campoRotulo, campoDado">
+					<h:graphicImage url="/images/spacer.png" height="1" width="150" />
+					<h:graphicImage url="/images/spacer.png" height="1" width="350" />
+					
+					<h:outputLabel value="#{bundle.OrganizacaoLabelNome}: "
+						for="nomeOrganizacao" />
+					<h:inputText id="nomeOrganizacao"
+						value="#{organizationController.selected.name}"
+						title="#{bundle.OrganizacaoLabelNome}" size="50"/>
+
+				</h:panelGrid>
+			</p:panel>
+			<br />
+                <ul>
+	                <li>
+	                	<h:commandButton styleClass="ui-state-default" action="#{organizationController.update}" value="#{bundle.GeralLinkSalvar}"/>
+	                </li>
+                </ul>
+            </h:form>
+        </ui:define>
+                <ui:define name="menuAcoes">
+			<h:form>
+			<ul class="menu-acoesAbas">
+                <li>
+                	<h:commandButton styleClass="ui-state-default" action="View" value="#{bundle.GeralLinkExibir}" immediate="true"/>
+                </li>
+                <li>
+                	<h:commandButton styleClass="ui-state-default" action="#{organizationController.prepareList}" value="#{bundle.GeralLinkListar}" immediate="true"/>
+                </li>
+                <li>
+                	<h:commandButton styleClass="ui-state-default" value="#{bundle.GeralLinkIndex}" action="/index" immediate="true" />			    
+			    </li>
+			</ul>
+			</h:form>
+		</ui:define>
+        
+    </ui:composition>
+
+</html>

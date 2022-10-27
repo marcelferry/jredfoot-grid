@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The Hypersonic embedded database JCA connection factory config -->
+
+<!-- $Id: hsqldb-ds.xml 63175 2007-05-21 16:26:06Z rrajesh $ -->
+
+<datasources>
+   <local-tx-datasource>
+      <jndi-name>SysPortalDS</jndi-name>
+      <connection-url>jdbc:hsqldb:${jboss.server.data.dir}${/}hypersonic${/}utportalDB</connection-url>
+      <driver-class>org.hsqldb.jdbcDriver</driver-class>
+      <user-name>sa</user-name>
+      <password></password>
+      <min-pool-size>5</min-pool-size>
+      <max-pool-size>20</max-pool-size>
+      <idle-timeout-minutes>0</idle-timeout-minutes>
+      <track-statements/>
+      <!-- security-domain>HsqlDbRealm</security-domain>  -->
+      <prepared-statement-cache-size>32</prepared-statement-cache-size>
+      <metadata>
+         <type-mapping>Hypersonic SQL</type-mapping>
+      </metadata>
+      <depends>jboss:service=Hypersonic,database=utportalDB</depends>
+   </local-tx-datasource>
+
+   <mbean code="org.jboss.jdbc.HypersonicDatabase" 
+     name="jboss:service=Hypersonic,database=utportalDB">
+     <attribute name="Database">utportalDB</attribute>
+     <attribute name="InProcessMode">true</attribute>
+   </mbean>
+   
+   <!-- 
+     <mbean code="org.jboss.services.binding.AliasJndiService"
+          name="jboss.jca:name=jboss/datasources/SysPortalDS,service=DataSourceBinding">
+       <attribute name="Alias">java:jboss/datasources/SysPortalDS</attribute>
+       <attribute name="Original">java:SysPortalDS</attribute>
+   </mbean>
+    -->
+</datasources>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListarTarefaTitulo}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+        <h:form>
+        	<p:panel header="Buscar Tarefa" width="800px">
+        	<h:panelGrid columns="2" width="800px" columnClasses="campoRotulo, campoDado,campoRotulo, campoDado">
+				<h:graphicImage url="/images/spacer.png" height="1" width="100" />
+				<h:graphicImage url="/images/spacer.png" height="1" width="300" />
+        	       			        		
+        		<h:outputLabel value="#{bundle.TarefaLabelColaborador}: "
+						for="colaborador" />
+				<h:panelGroup>						
+				<h:selectOneMenu id="colaborador"
+						value="#{tarefaController.filtroColaborador}">
+					<f:selectItems value="#{colaboradorController.itemsAvailableSelectOne}" />
+				</h:selectOneMenu>
+	             </h:panelGroup>
+				
+        		<h:outputLabel value="#{bundle.TarefaLabelLinguagem}: "	for="linguagem" />						
+				<h:selectOneMenu id="linguagem"
+						value="#{tarefaController.filtroLinguagem}">
+					<f:selectItems value="#{linguagemController.itemsAvailableSelectOne}" />
+				</h:selectOneMenu>   						
+								
+				<h:outputLabel value="#{bundle.TarefaLabelCliente}: "
+							for="clienteTarefa" />						
+				<h:selectOneMenu id="clienteTarefa"
+						value="#{tarefaController.filtroCliente}">
+					<f:selectItems value="#{tarefaController.clienteSelectOne}" />
+				</h:selectOneMenu>  		
+        		
+        		<h:outputLabel value="#{bundle.TarefaLabelID}: "
+						for="codigo" />				
+				<h:inputText id="codigo" value="#{tarefaController.filtroID}"/>
+				
+        		<h:outputText value="#{bundle.Opcoes} :"/>			
+				<h:panelGroup>
+				   
+				<h:selectBooleanCheckbox id="programador" style="border: none;"  value="#{tarefaController.filtroCQ}"/>
+					<h:outputLabel value="#{bundle.TarefaLabelProgramadores}" for="programador" />
+				<h:outputText value=" "/>
+					<h:selectBooleanCheckbox id="entregue" style="border:none;" value="#{tarefaController.filtroEntregue}">
+						<p:ajax event="change" partialSubmit="true" update="avaliacao, lbAvaliacao" actionListener="#{tarefaController.ativaAvaliacao}" />	
+					</h:selectBooleanCheckbox>
+					<h:outputLabel value="#{bundle.TarefaLabelEntregue}" for="entregue" />
+	                <h:outputText value=" "/>
+	                <h:selectBooleanCheckbox id="avaliacao" style="border:none;" value="#{tarefaController.filtroAvaliacao}" disabled="#{ ! tarefaController.filtroEntregue }"/>								
+					<h:outputLabel id="lbAvaliacao" value="#{bundle.TarefaLabelPendenteAvaliacao}" for="avaliacao" disabled="#{ ! tarefaController.filtroEntregue }" />
+	                
+				</h:panelGroup>				
+				
+        	</h:panelGrid>        		
+        	<f:facet name="footer">
+        		<h:commandButton styleClass="ui-state-default" action="#{tarefaController.prepareFilter}" value="#{bundle.TarefaLinkFiltrar}" />
+    		    <h:outputText value=" "/>					
+				<h:selectBooleanCheckbox id="memorizar" style="border:none;" value="#{tarefaController.filtrosMemorizar}"/>								
+				<h:outputLabel value="Memorizar Filtros Selecionados" for="memorizar"  />
+			</f:facet>       		
+        	</p:panel>
+        </h:form>
+        <br />        
+        <h:form styleClass="jsfcrud_list_form">        
+            <h:outputText escape="false" value="#{bundle.TarefaListaVazia}" rendered="#{tarefaController.itemsFiltrado.rowCount == 0}"/>
+            <h:panelGroup rendered="#{tarefaController.itemsFiltrado.rowCount > 0}">
+                   <p:dataTable id="tabela" paginatorPosition="bottom" value="#{tarefaController.itemsFiltrado}" 
+                	var="item" rowIndexVar="id" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"  
+					firstPageLinkLabel="#{ bundle.Primeira }" lastPageLinkLabel="#{ bundle.Ultima }" 
+					nextPageLinkLabel="#{ bundle.Proxima }" previousPageLinkLabel="#{ bundle.Anterior }" 
+					sortAscMessage="#{ bundle.Ascendente }" sortDescMessage="#{ bundle.Descendente }" 
+					loadingMessage="#{ bundle.Carregando }"  >
+					<p:column width="10" >
+                        <f:facet name="header">
+                            <h:outputText value=" "/>
+                        </f:facet>                        
+                   		<h:outputText value="#{id + 1}"/>
+                    </p:column>                    
+                    <p:column width="40" sortBy="#{item.id}" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.TarefaLabelID}"/>
+                        </f:facet>
+                        <h:commandLink class="detalhes" action="#{tarefaController.prepareView}" title="#{bundle.TarefaLinkExibir}">                        
+                       		<h:outputText value="#{item.id}"/>
+                       	</h:commandLink>
+                    </p:column>                    
+                    <p:column width="200" sortBy="#{item.descricao}" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.TarefaLabelDescricao}"/>
+                        </f:facet>
+                        <h:outputText value="RET " style="color: red; font-weight: bold;" rendered="#{item.retrabalho}" /> 
+                        <h:outputText value="EM " style="color: red; font-weight: bold;" rendered="#{item.emergencial}" /> 
+                       	<h:outputText value="#{item.linguagem.nome} - #{item.descricao}" />                        
+                    </p:column>                    
+                    <p:column width="150" sortBy="#{item.cq.nome}" rendered="false">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.TarefaLabelCQ}"/>
+                        </f:facet>
+                       	<h:outputText value="#{item.cq.nome}"/>                        
+                    </p:column>                    
+                    <p:column width="150" sortBy="#{item.programador.nome}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.TarefaLabelProgramador}"/>
+                        </f:facet>
+                       		<h:outputText value="#{item.programador.nome}"/>                        
+                    </p:column>
+                    <p:column width="90" sortBy="#{item.recebimento}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.TarefaLabelReceb}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.recebimento}">
+                        	<f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="50" sortBy="#{item.esforco}" rendered="false">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.TarefaLabelEsforco}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.esforco}"/>
+                    </p:column>
+                    <p:column width="70" sortBy="#{item.entrega}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.TarefaLabelEntrega}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.entrega}">
+                        	<f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column width="10">
+                        <f:facet name="header">
+                            <h:outputText value=" "/>
+                        </f:facet>
+                        <h:commandButton action="#{tarefaController.prepareEdit}" style="border: none;" value="#{bundle.TarefaLinkEditar}"  image="/images/icon_modify.gif"/>
+                    </p:column>
+                </p:dataTable>   
+				<h:commandLink>  
+				    <p:graphicImage value="/images/excel.png" width="16" height="16" />  
+				    <p:dataExporter type="xls" excludeColumns="1,8" target="tabela" fileName="horasextras"/>
+				    <h:outputText value="Exportar para xls"/>  
+				</h:commandLink>
+				<h:outputText value=" "/>    				  
+				<h:commandLink>  
+				    <p:graphicImage value="/images/pdf.png"  width="16" height="16"/>  
+				    <p:dataExporter type="pdf" excludeColumns="1,8" target="tabela" fileName="horasextras"/>
+				    <h:outputText value="Exportar para pdf"/>  
+				</h:commandLink>   
+				<h:outputText value=" "/>
+				 <h:commandLink>  
+				    <p:graphicImage value="/images/xml.png"  width="16" height="16"/>  
+				    <p:dataExporter type="xml" excludeColumns="1,8" target="tabela" fileName="horasextras"/>
+				    <h:outputText value="Exportar para xml"/>  
+				</h:commandLink>                             
+				                            
+            </h:panelGroup>
+        </h:form>
+        </ui:define>
+        <ui:define name="menuAcoes">
+			<h:form>
+			<ul class="menu-acoesAbas">
+			    <li>
+			    	<h:commandButton styleClass="ui-state-default" action="#{tarefaController.prepareCreate}" value="#{bundle.TarefaLinkNovo}"/>
+			    </li>
+			    <li>
+			    	<h:outputText value=" " />
+			    </li>
+			    <li>
+			    	<h:commandButton styleClass="ui-state-default" action="#{tarefaController.prepareList}" value="#{bundle.TarefaLinkListar}"/>
+			    </li>
+			    <li>
+			    	<h:outputText value=" " />
+			    </li>			    
+			    <li>
+            		<h:commandButton styleClass="ui-state-default" value="#{bundle.TarefaLinkIndex}" action="/index" immediate="true" />			    
+			    </li>
+			</ul>
+			</h:form>
+		</ui:define>
+        
+    </ui:composition>
+ 
+</html>
